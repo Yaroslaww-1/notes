@@ -37,6 +37,6 @@ export const createRootElement = ({
 }
 
 export const setRootElement = (newRootElement) => {
-  const root = document.getElementById('root');
-  root.replaceWith(newRootElement);
+  const oldElement = document.getElementById('root');
+  oldElement.replaceWith(newRootElement);
 }

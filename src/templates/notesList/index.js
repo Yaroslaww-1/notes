@@ -16,3 +16,8 @@ export const createNotesListElement = ({ notes, onNoteSelect }) => {
   });
   return rootElement;
 }
+
+export const setNotesListElement = (newNotesListElement) => {
+  const oldElement = document.getElementsByClassName('notes-list')[0];
+  oldElement.replaceWith(newNotesListElement);
+}

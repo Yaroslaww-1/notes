@@ -10,3 +10,8 @@ export const createNoteEditElement = ({ note, isEditable = false, onNoteEdit }) 
   });
   return rootElement;
 }
+
+export const setNoteEditElement = (newNoteEditElement) => {
+  const oldElement = document.getElementsByClassName('note-edit')[0];
+  oldElement.replaceWith(newNoteEditElement);
+}

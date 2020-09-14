@@ -33,6 +33,7 @@ export class NotesService extends EventManager {
     this.#unselectAll();
     note.isSelected = true;
     this.updateNoteById(note.id, note);
+    this.notify('updateNoteEdit');
   };
 
   getSelectedNote = () => {
@@ -46,7 +47,7 @@ export class NotesService extends EventManager {
       if (note.id === id) note = newNote;
       return note;
     });
-    this.notify('updateNotes', this.notes);
+    this.notify('updateNotesList', this.notes);
   }
 
   #unselectAll = () => {

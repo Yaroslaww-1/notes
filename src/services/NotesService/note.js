@@ -2,12 +2,17 @@ import { getDayMonthYearFormat } from '../../helpers/date.helper';
 import { createUUID } from '../../helpers/uuid.helper';
 
 export class Note {
-  constructor({ text, createdAt, updatedAt, isSelected }) {
+  constructor({
+    text = '',
+    createdAt = new Date(),
+    updatedAt = null,
+    isSelected = false
+  }) {
     this.id = createUUID();
-    this.isSelected = isSelected || false;
-    this.text = text || '';
-    this.createdAt = createdAt || new Date();
-    this.updatedAt = updatedAt || null;
+    this.isSelected = isSelected;
+    this.text = text;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   getTimestamp = () => {

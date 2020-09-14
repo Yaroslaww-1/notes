@@ -9,16 +9,21 @@ const notesService = new NotesService();
 const RootElementFactory = (params) => {
   const rootElement = createRootElement({
     notes: notesService.notes,
-    onNoteCreate: () => notesService.addNote(new Note({ text: 'New note' })),
+    selectedNote: notesService.getSelectedNote(),
+    onNoteCreate: () => notesService.addNote(new Note({})),
     onNoteDelete: () => notesService.deleteSelectedNote(),
     onNoteSelect: (note) => notesService.selectNote(note),
+    onNoteEdit: (note, newText) => {
+      note.text = newText;
+      notesService.updateNoteById(note.id, note)
+    },
+    isEditable: !!notesService.getSelectedNote(),
     ...params
   });
   return rootElement;
 };
 
-notesService.subscribe('updateNotes', (data) => {
-  console.log('event', data);
+notesService.subscribe('updateNotes', () => {
   setRootElement(RootElementFactory());
 });
 

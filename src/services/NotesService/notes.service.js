@@ -1,5 +1,4 @@
 import { EventManager } from '../../helpers/events.helper';
-import { Note } from './note';
 
 export class NotesService extends EventManager {
   constructor() {
@@ -33,10 +32,7 @@ export class NotesService extends EventManager {
   selectNote = (note) => {
     this.#unselectAll();
     note.isSelected = true;
-    this.notes = this.notes.map((_note) =>
-      _note.id === note.id ? note :_note
-    );
-    this.notify('updateNotes', this.notes);
+    this.updateNoteById(note.id, note);
   };
 
   getSelectedNote = () => {
@@ -45,9 +41,17 @@ export class NotesService extends EventManager {
     );
   }
 
+  updateNoteById = (id, newNote) => {
+    this.notes = this.notes.map((note) => {
+      if (note.id === id) note = newNote;
+      return note;
+    });
+    this.notify('updateNotes', this.notes);
+  }
+
   #unselectAll = () => {
     this.notes = this.notes.map(note => {
-      note.unselect();
+      note.isSelected = false;
       return note;
     });
     this.notify('updateNotes', this.notes);

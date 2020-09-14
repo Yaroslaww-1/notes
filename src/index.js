@@ -1,17 +1,21 @@
 import { Note, NotesService } from './notes.service';
+import { createRootElement, setRootElement } from './templates/root';
 
 const notesService = new NotesService();
-notesService.notes.observe(() => {
-  console.log('emit');
+notesService.notes.observe(({ payload }) => {
+  setRootElement(
+    createRootElement({
+      notes: notesService.notes.array,
+      selectedNote: payload,
+      onNoteCreate: () => notesService.addNote(new Note({ text: 'New note' })),
+    })
+  );
 }).filterByType('push');
 
-const root = document.getElementById('root');
-
-const addNoteButton = document.createElement('button');
-addNoteButton.addEventListener('click', () => {
-  const note = new Note({ text: 'hello' });
-  notesService.addNote(note);
-});
-addNoteButton.innerHTML = 'add note';
-
-root.appendChild(addNoteButton);
+setRootElement(
+  createRootElement({
+    notes: notesService.notes.array,
+    selectedNote: null,
+    onNoteCreate: () => notesService.addNote(new Note({ text: 'New note' })),
+  })
+);

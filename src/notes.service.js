@@ -1,17 +1,20 @@
+import { createUUID } from './helpers/uuid.helper';
 import { ObservableArrayFactory } from './observableArray';
 
 export class Note {
   constructor({ text, createdAt, updatedAt }) {
-    this.id = Date.now();
-    this.text = text;
+    this.id = createUUID();
+    this.text = text || '';
     this.createdAt = createdAt || new Date();
     this.updatedAt = updatedAt || null;
-    this.header = this.getHeader(text);
+    this.title = text ? this.getTitle(text) : 'New note';
   }
 
-  getHeader = (text) => {
-    const header = text.slice(0, text.indexOf('\n'));
-    return header;
+  getTitle = (text) => {
+    const lineEndIndex = text.indexOf('\n');
+    if (lineEndIndex == -1) return text;
+    const title = text.slice(0, lineEndIndex + 1);
+    return title;
   }
 }
 

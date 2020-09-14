@@ -1,3 +1,5 @@
+import { createUUID } from "./helpers/uuid.helper";
+
 export class ObservableArrayEvent {
   constructor ({ type, payload }) {
     this.type = type;
@@ -9,7 +11,7 @@ export const ObservableArrayFactory = (array) => {
   const observables = [];
 
   const observe = (notifyCallback) => {
-    const id = Date.now();
+    const id = createUUID();
     observables.push({ id, notifyCallback, filterByType: null });
     return {
       filterByType: (type) => {

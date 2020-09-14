@@ -1,8 +1,10 @@
 import './styles.css';
 
-export const createNoteElement = ({ title, timestamp, textPreview }) => {
+export const createNoteElement = ({ title, timestamp, textPreview, isSelected, onClick }) => {
   const rootElement = document.createElement('div');
   rootElement.className = 'note';
+  if (isSelected) rootElement.setAttribute('selected', true);
+  rootElement.addEventListener('click', onClick);
 
   const headerElement = document.createElement('div');
   headerElement.className = 'header';

@@ -1,19 +1,23 @@
-import { getDayMonthYearFormat } from './helpers/date.helper';
-import { createUUID } from './helpers/uuid.helper';
-import { ObservableArrayFactory } from './observableArray';
+import { getDayMonthYearFormat } from '../../helpers/date.helper';
+import { createUUID } from '../../helpers/uuid.helper';
 
 export class Note {
-  constructor({ text, createdAt, updatedAt }) {
+  constructor({ text, createdAt, updatedAt, isSelected }) {
     this.id = createUUID();
+    this.isSelected = isSelected || false;
     this.text = text || '';
     this.createdAt = createdAt || new Date();
     this.updatedAt = updatedAt || null;
   }
 
   getTimestamp = () => {
-    const timestamp = getDayMonthYearFormat(this.createdAt);
+    const timestamp = getDayMonthYearFormat(
+      this.updatedAt ? this.updatedAt : this.createdAt
+    );
     return timestamp;
   }
+
+  getFullTimestamp = () => this.updatedAt ? this.updatedAt : this.createdAt;
 
   getTextPreview = () => {
     const PREVIEW_MAXIMUM_LENGTH = 25;
@@ -28,13 +32,7 @@ export class Note {
     const title = this.text.slice(0, lineEndIndex + 1);
     return title;
   }
-}
-
-export class NotesService {
-  constructor() {
-    this.notes = ObservableArrayFactory([]);
-  }
-  addNote = (note) => {
-    this.notes.push(note);
-  }
+  
+  unselect = () => this.isSelected = false;
+  select = () => this.isSelected = true;
 }

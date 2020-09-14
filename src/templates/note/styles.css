@@ -19,3 +19,7 @@
   margin-left: 10px;
   color: #99999b;
 }
+
+.note[selected=true] {
+  background-color: #cb9520;
+}

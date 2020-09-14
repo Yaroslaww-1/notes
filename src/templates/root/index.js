@@ -9,6 +9,7 @@ export const createRootElement = ({
   selectedNote,
   onNoteCreate,
   onNoteDelete,
+  onNoteSelect,
   onNoteEdit,
 }) => {
   const rootElement = document.createElement('div');
@@ -19,7 +20,7 @@ export const createRootElement = ({
 
   const mainContentElement = document.createElement('div');
   mainContentElement.className = 'main-content';
-  const notesListElement = createNotesListElement({ notes });
+  const notesListElement = createNotesListElement({ notes, selectedNote, onNoteSelect, onNoteEdit });
   mainContentElement.appendChild(notesListElement);
 
   const noteEditElement = createNoteEditElement();

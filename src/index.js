@@ -9,9 +9,8 @@ const notesService = new NotesService();
 const RootElementFactory = (params) => {
   const rootElement = createRootElement({
     notes: notesService.notes,
-    selectedNote: notesService.getSelectedNote(),
     onNoteCreate: () => notesService.addNote(new Note({ text: 'New note' })),
-    onNoteDelete: (note) => notesService.deleteNote(note),
+    onNoteDelete: () => notesService.deleteSelectedNote(),
     onNoteSelect: (note) => notesService.selectNote(note),
     ...params
   });

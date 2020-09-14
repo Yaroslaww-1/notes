@@ -6,7 +6,6 @@ import { createNoteEditElement } from '../noteEdit';
 
 export const createRootElement = ({
   notes,
-  selectedNote,
   onNoteCreate,
   onNoteDelete,
   onNoteSelect,
@@ -20,7 +19,7 @@ export const createRootElement = ({
 
   const mainContentElement = document.createElement('div');
   mainContentElement.className = 'main-content';
-  const notesListElement = createNotesListElement({ notes, selectedNote, onNoteSelect, onNoteEdit });
+  const notesListElement = createNotesListElement({ notes, onNoteSelect, onNoteEdit });
   mainContentElement.appendChild(notesListElement);
 
   const noteEditElement = createNoteEditElement();

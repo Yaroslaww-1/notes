@@ -22,6 +22,14 @@ export class NotesService extends EventManager {
     this.notify('updateNotes', this.notes);
   };
 
+  deleteSelectedNote = () => {
+    const selectedNote = this.getSelectedNote();
+    if (selectedNote) {
+      this.notes = this.notes.filter(note => note.id !== selectedNote.id);
+      this.notify('updateNotes', this.notes);
+    }
+  }
+
   selectNote = (note) => {
     this.#unselectAll();
     note.isSelected = true;
@@ -32,8 +40,8 @@ export class NotesService extends EventManager {
   };
 
   getSelectedNote = () => {
-    this.notes.find(
-      note => note.isSelected === true
+    return this.notes.find(
+      note => note.isSelected
     );
   }
 

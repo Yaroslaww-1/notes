@@ -1,3 +1,5 @@
+import './index.css';
+
 import { Note, NotesService } from './notes.service';
 import { createRootElement, setRootElement } from './templates/root';
 

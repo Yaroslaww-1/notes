@@ -1,0 +1,13 @@
+#root > .header {
+  display: flex;
+  flex: 5;
+  flex-direction: row;
+  background-color: gray;
+}
+
+#root > .header button {
+  background-color: #cb9520;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

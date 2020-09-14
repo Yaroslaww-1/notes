@@ -1,0 +1,21 @@
+.note {
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  margin: 20px;
+}
+
+.note > .header {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.note > .content {
+  display: flex;
+  flex-direction: row;
+}
+
+.note > .content > .preview {
+  margin-left: 10px;
+  color: #99999b;
+}

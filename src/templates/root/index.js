@@ -1,5 +1,8 @@
+import './styles.css';
+
 import { createHeader } from "../header";
 import { createNotesListElement } from "../notesList";
+import { createNoteEditElement } from '../noteEdit';
 
 export const createRootElement = ({
   notes,
@@ -9,13 +12,18 @@ export const createRootElement = ({
   onNoteEdit,
 }) => {
   const rootElement = document.createElement('div');
+  rootElement.setAttribute('id', 'root');
 
   const headerElement = createHeader({ onNoteCreate, onNoteDelete });
   rootElement.appendChild(headerElement);
 
   const mainContentElement = document.createElement('div');
+  mainContentElement.className = 'main-content';
   const notesListElement = createNotesListElement({ notes });
   mainContentElement.appendChild(notesListElement);
+
+  const noteEditElement = createNoteEditElement();
+  mainContentElement.appendChild(noteEditElement);
 
   rootElement.appendChild(mainContentElement);
 
@@ -24,8 +32,5 @@ export const createRootElement = ({
 
 export const setRootElement = (newRootElement) => {
   const root = document.getElementById('root');
-  const newRoot = document.createElement('div');
-  newRoot.setAttribute('id', 'root');
-  newRoot.appendChild(newRootElement);
-  root.replaceWith(newRoot);
+  root.replaceWith(newRootElement);
 }

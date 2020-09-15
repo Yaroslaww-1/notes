@@ -56,7 +56,7 @@ module.exports = [
     output: {
       path: path.resolve(__dirname, 'docs'), 
       filename: 'bundle.js',
-      publicPath: '/docs/'
+      publicPath: './'
     },
     module: {
       rules: [
@@ -90,12 +90,5 @@ module.exports = [
       }),
       new MiniCssExtractPlugin(),
     ],
-    mode: 'development',
-    devServer: {
-      publicPath: '/dist',
-      contentBase: path.join(__dirname, 'dist'),
-      hot: true,
-    },
-    devtool: "source-map"
   }
 ];

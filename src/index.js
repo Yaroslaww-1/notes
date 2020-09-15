@@ -5,9 +5,24 @@ import { Note } from './services/NotesService/note';
 import { createRootElement, setRootElement } from './templates/root';
 import { createNotesListElement, setNotesListElement } from './templates/notesList/index';
 import { createNoteEditElement, setNoteEditElement } from './templates/noteEdit/index';
+import { getIdFromUrl, setIdParam } from './helpers/url.helper';
 
 (async () => {
   const notesService = new NotesService();
+
+  const noteId = getIdFromUrl(window.location.search);
+  if (noteId) notesService.selectNoteById(noteId);
+
+  window.addEventListener('locationchange', () => {
+    const noteId = getIdFromUrl(window.location.search);
+    notesService.selectNoteById(noteId);
+  });
+
+  const onNoteSelect = (note) => {
+    setIdParam(window.location.search, note.id, (params) => {
+      window.location.search = params.toString();
+    });
+  }
 
   const RootElementFactory = (params) => {
     const rootElement = createRootElement({
@@ -15,7 +30,7 @@ import { createNoteEditElement, setNoteEditElement } from './templates/noteEdit/
       selectedNote: notesService.getSelectedNote(),
       onNoteCreate: () => notesService.addNote(new Note({})),
       onNoteDelete: () => notesService.deleteSelectedNote(),
-      onNoteSelect: (note) => notesService.selectNote(note),
+      onNoteSelect,
       onNoteEdit: (note, newText) => {
         note.text = newText;
         notesService.updateNoteById(note.id, note)
@@ -34,13 +49,12 @@ import { createNoteEditElement, setNoteEditElement } from './templates/noteEdit/
     setNotesListElement(
       createNotesListElement({
         notes: notesService.getAllNotes(),
-        onNoteSelect: (note) => notesService.selectNote(note),
+        onNoteSelect,
       })
     );
-  })
+  });
   
   notesService.subscribe('updateNoteEdit', () => {
-    console.log(notesService.getSelectedNote());
     setNoteEditElement(
       createNoteEditElement({
         note: notesService.getSelectedNote(),
@@ -51,7 +65,7 @@ import { createNoteEditElement, setNoteEditElement } from './templates/noteEdit/
         },
       })
     );
-  })
-  
+  });
+
   setRootElement(RootElementFactory());
 })();

@@ -3,7 +3,6 @@ import { Note } from "../services/NotesService/note";
 export class NoteRepository {
   constructor() {}
 
-  // use async here to be able to replace with calls to api in future
   getAll = () => {
     let notes = JSON.parse(localStorage.getItem('notes')) || [];
     notes = notes.map(note => Note.fromJsonParsed(note));
@@ -17,10 +16,7 @@ export class NoteRepository {
   };
 
   deleteById = (id) => {
-    const notes = this.getAll();
-    notes.reduce((newNotes, _note) => 
-      _note.id === note.id ? [newNotes, _note] : newNotes
-    );
+    const notes = this.getAll().filter(note => note.id !== id);
     localStorage.setItem('notes', JSON.stringify(notes));
   }
 

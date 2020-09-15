@@ -5,6 +5,7 @@ export class NotesService extends EventManager {
   constructor() {
     super();
     this.storage = new NoteRepository();
+    this.#unselectAll();
   }
 
   getAllNotes = () => {
@@ -35,6 +36,15 @@ export class NotesService extends EventManager {
 
   selectNote = (note) => {
     this.#unselectAll();
+    note.isSelected = true;
+    this.updateNoteById(note.id, note);
+    this.notify('updateNoteEdit');
+  };
+
+  selectNoteById = (id) => {
+    this.#unselectAll();
+    const note = this.storage.get({ id });
+    if (!note) return;
     note.isSelected = true;
     this.updateNoteById(note.id, note);
     this.notify('updateNoteEdit');

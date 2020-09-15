@@ -1,31 +1,35 @@
 import { EventManager } from '../../helpers/events.helper';
+import { NoteRepository } from '../../data/note.repository';
 
 export class NotesService extends EventManager {
   constructor() {
     super();
-    this.notes = [];
+    this.storage = new NoteRepository();
+  }
+
+  getAllNotes = () => {
+    const notes = this.storage.getAll();
+    return notes;
   }
 
   addNote = (note) => {
     this.#unselectAll();
-    this.notes.push(note);
+    this.storage.add(note);
     this.selectNote(note);
     this.#sortNotes();
-    this.notify('updateNotes', this.notes);
+    this.notify('updateNotes');
   }
 
   deleteNote = (note) => {
-    this.notes.reduce((notes, _note) => 
-      _note.id === note.id ? [notes, _note] : notes
-    );
+    this.storage.deleteById(note.id);
     this.notify('updateNotes', this.notes);
   };
 
   deleteSelectedNote = () => {
     const selectedNote = this.getSelectedNote();
     if (selectedNote) {
-      this.notes = this.notes.filter(note => note.id !== selectedNote.id);
-      this.notify('updateNotes', this.notes);
+      this.storage.deleteById(selectedNote.id);
+      this.notify('updateNotes');
     }
   }
 
@@ -37,30 +41,30 @@ export class NotesService extends EventManager {
   };
 
   getSelectedNote = () => {
-    return this.notes.find(
-      note => note.isSelected
-    );
+    const note = this.storage.get({ isSelected: true });
+    return note;
   }
 
   updateNoteById = (id, newNote) => {
-    this.notes = this.notes.map((note) => {
-      if (note.id === id) note = newNote;
-      return note;
-    });
+    this.storage.updateById(id, newNote);
     this.notify('updateNotesList', this.notes);
   }
 
   #unselectAll = () => {
-    this.notes = this.notes.map(note => {
+    let notes = this.storage.getAll();
+    notes = notes.map(note => {
       note.isSelected = false;
       return note;
     });
-    this.notify('updateNotes', this.notes);
+    this.storage.setAll(notes);
+    this.notify('updateNotes');
   }
 
   #sortNotes = () => {
-    this.notes.sort((note1, note2) => 
+    const notes = this.storage.getAll();
+    notes.sort((note1, note2) => 
       new Date(note2.getFullTimestamp()) - new Date(note1.getFullTimestamp())
     );
+    this.storage.setAll(notes);
   }
 }

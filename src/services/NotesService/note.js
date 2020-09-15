@@ -6,9 +6,10 @@ export class Note {
     text = '',
     createdAt = new Date(),
     updatedAt = null,
-    isSelected = false
+    isSelected = false,
+    id = createUUID(),
   }) {
-    this.id = createUUID();
+    this.id = id;
     this.isSelected = isSelected;
     this.text = text;
     this.createdAt = createdAt;
@@ -40,4 +41,16 @@ export class Note {
   
   unselect = () => this.isSelected = false;
   select = () => this.isSelected = true;
+
+  static fromJsonParsed = (parsedJson) => {
+    const { id, text, createdAt, updatedAt, isSelected } = parsedJson;
+    const note = new Note({
+      id,
+      text,
+      createdAt: new Date(createdAt),
+      updatedAt: updatedAt && new Date(updatedAt),
+      isSelected,
+    });
+    return note;
+  }
 }

@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FileManagerPlugin = require('filemanager-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -40,6 +41,14 @@ module.exports = {
       filename: 'index.html'
     }),
     new MiniCssExtractPlugin(),
+    new FileManagerPlugin({
+      onEnd: {
+        copy: [{
+          source: './dist/*.*',
+          destination: './docs/',
+        }],
+      },
+    }),
   ],
   mode: 'development',
   devServer: {

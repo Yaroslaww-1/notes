@@ -1,0 +1,70 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+.main-content {
+  display: flex;
+  flex: 95;
+  flex-direction: row;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#root > .header {
+  display: flex;
+  flex: 5;
+  flex-direction: row;
+  background-color: gray;
+}
+
+#root > .header button {
+  background-color: #cb9520;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.notes-list {
+  height: 100%;
+  background-color: #1d1c23;
+  flex: 20;
+}
+.note {
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  margin: 20px;
+}
+
+.note > .header {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.note > .content {
+  display: flex;
+  flex-direction: row;
+}
+
+.note > .content > .preview {
+  margin-left: 10px;
+  color: #99999b;
+}
+
+.note[selected=true] {
+  background-color: #cb9520;
+}
+.note-edit {
+  display: flex;
+  flex: 80;
+  background-color: #242424;
+  color: #ffffff;
+  font-size: 18px;
+  outline: none;
+}
+
+/*# sourceMappingURL=main.css.map*/

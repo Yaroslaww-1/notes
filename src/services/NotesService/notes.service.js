@@ -23,7 +23,7 @@ export class NotesService extends EventManager {
 
   deleteNote = (note) => {
     this.storage.deleteById(note.id);
-    this.notify('updateNotes', this.notes);
+    this.notify('updateNotes');
   };
 
   deleteSelectedNote = () => {
@@ -46,7 +46,8 @@ export class NotesService extends EventManager {
     const note = this.storage.get({ id });
     if (!note) return;
     note.isSelected = true;
-    this.updateNoteById(note.id, note);
+    this.storage.updateById(id, note);
+    this.notify('updateNotesList');
     this.notify('updateNoteEdit');
   };
 
@@ -56,8 +57,10 @@ export class NotesService extends EventManager {
   }
 
   updateNoteById = (id, newNote) => {
+    newNote.updatedAt = new Date();
     this.storage.updateById(id, newNote);
-    this.notify('updateNotesList', this.notes);
+    this.#sortNotes();
+    this.notify('updateNotesList');
   }
 
   #unselectAll = () => {

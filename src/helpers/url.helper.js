@@ -1,6 +1,6 @@
 export const getIdFromUrl = (url) => {
   const urlParams = new URLSearchParams(url);
-  const idParam = urlParams.get('id');
+  const idParam = urlParams.get('id') || '';
   const idParamsParts = idParam.split('_');
   const id = idParamsParts[idParamsParts.length - 1];
   return id;

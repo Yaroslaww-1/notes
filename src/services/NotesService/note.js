@@ -33,9 +33,14 @@ export class Note {
 
   getTitle = () => {
     if (this.text === '') return 'New Note';
-    const lineEndIndex = this.text.indexOf('\n');
-    if (lineEndIndex == -1) return this.text;
-    const title = this.text.slice(0, lineEndIndex + 1);
+    const TITLE_MAXIMUM_LENGTH = 35;
+    let title = '';
+    if (this.text.includes('\n')) {
+      const titleEndIndex = Math.min(this.text.indexOf('\n'), TITLE_MAXIMUM_LENGTH);
+      title = this.text.slice(0, titleEndIndex + 1);
+    } else {
+      title = this.text.slice(0, TITLE_MAXIMUM_LENGTH);
+    }
     return title;
   }
   

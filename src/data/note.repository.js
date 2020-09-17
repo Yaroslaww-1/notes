@@ -10,8 +10,9 @@ export class NoteRepository {
   };
 
   add = (note) => {
-    const notes = this.getAll();
-    notes.push(note);
+    let notes = this.getAll();
+    // Show usage of prototypes
+    Array.prototype.push.apply(notes, [note]);
     localStorage.setItem('notes', JSON.stringify(notes));
   };
 

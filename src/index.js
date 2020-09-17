@@ -7,6 +7,7 @@ import { createNotesListElement, setNotesListElement } from './templates/notesLi
 import { createNoteEditElement, setNoteEditElement } from './templates/noteEdit/index';
 import { getIdFromUrl, setIdParam } from './helpers/url.helper';
 
+// Show usage of IIFE
 (async () => {
   const notesService = new NotesService();
 
@@ -19,7 +20,7 @@ import { getIdFromUrl, setIdParam } from './helpers/url.helper';
   });
 
   const onNoteSelect = (note) => {
-    setIdParam(window.location.search, note.id, (params) => {
+    setIdParam(window.location.search, `${note.getTitle()}_${note.id}`, (params) => {
       window.location.search = params.toString();
     });
   }

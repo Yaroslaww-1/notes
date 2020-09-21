@@ -27,7 +27,7 @@ export class Note {
 
   getTextPreview = () => {
     const PREVIEW_MAXIMUM_LENGTH = 25;
-    const preview = this.text.slice(0, PREVIEW_MAXIMUM_LENGTH);
+    const preview = this.text.slice(0, PREVIEW_MAXIMUM_LENGTH).replace(/\n/g, ' ');
     return preview;
   }
 

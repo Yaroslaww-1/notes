@@ -46,6 +46,7 @@ import { getIdFromUrl, getNoteUrl, setIdParam, updateIdParam } from './helpers/u
         notesService.updateNoteById(note.id, note)
       },
       isEditable: !!notesService.getSelectedNote(),
+      withAnimation: true,
       ...params
     });
     return rootElement;
@@ -55,13 +56,15 @@ import { getIdFromUrl, getNoteUrl, setIdParam, updateIdParam } from './helpers/u
     setRootElement(RootElementFactory());
   });
   
-  notesService.subscribe('updateNotesList', () => {
+  notesService.subscribe('updateNotesList', ({ notificationType }) => {
     updateIdParam(window.location.search, getNoteUrl(notesService.getSelectedNote()), (newParam) => {
       window.history.replaceState(null, null, newParam)
     });
+    console.log(notificationType);
     setNotesListElement(
       createNotesListElement({
         notes: notesService.getAllNotes(),
+        withAnimation: notificationType !== 'updateNotePreview',
         onNoteSelect,
       })
     );

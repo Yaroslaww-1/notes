@@ -1,7 +1,7 @@
 import './styles.css';
 import { createNoteElement } from "../note";
 
-export const createNotesListElement = ({ notes, onNoteSelect }) => {
+export const createNotesListElement = ({ notes, onNoteSelect, withAnimation = false }) => {
   const rootElement = document.createElement('div');
   rootElement.className = 'notes-list';
   notes.forEach(note => {
@@ -11,6 +11,7 @@ export const createNotesListElement = ({ notes, onNoteSelect }) => {
       textPreview: note.getTextPreview(),
       timestamp: note.getTimestamp(),
       onClick: () => onNoteSelect(note),
+      withAnimation,
     });
     rootElement.appendChild(noteElement);
   });

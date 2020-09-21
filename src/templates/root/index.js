@@ -12,6 +12,7 @@ export const createRootElement = ({
   onNoteEdit,
   isEditable,
   selectedNote,
+  ...props
 }) => {
   const rootElement = document.createElement('div');
   rootElement.setAttribute('id', 'root');
@@ -21,7 +22,7 @@ export const createRootElement = ({
 
   const mainContentElement = document.createElement('div');
   mainContentElement.className = 'main-content';
-  const notesListElement = createNotesListElement({ notes, onNoteSelect });
+  const notesListElement = createNotesListElement({ notes, onNoteSelect, ...props });
   mainContentElement.appendChild(notesListElement);
 
   const noteEditElement = createNoteEditElement({

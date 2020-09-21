@@ -47,7 +47,7 @@ export class NotesService extends EventManager {
     if (!note) return;
     note.isSelected = true;
     this.storage.updateById(id, note);
-    this.notify('updateNotesList');
+    this.notify('updateNotesList', { notificationType: 'select' });
     this.notify('updateNoteEdit');
   };
 
@@ -60,7 +60,7 @@ export class NotesService extends EventManager {
     newNote.updatedAt = new Date();
     this.storage.updateById(id, newNote);
     this.#sortNotes();
-    this.notify('updateNotesList');
+    this.notify('updateNotesList', { notificationType: 'updateNotePreview' });
   }
 
   #unselectAll = () => {

@@ -1,15 +1,19 @@
 import './styles.css';
 
-export const createNoteElement = ({ title, id, timestamp, textPreview, isSelected, onClick }) => {
+const applyAnimation = (element) => {
+  element.setAttribute('animated', true);
+  setTimeout(() => {
+    element.setAttribute('animated', false);
+  }, 0);
+}
+
+export const createNoteElement = ({ title, id, timestamp, textPreview, isSelected, onClick, withAnimation }) => {
   const rootElement = document.createElement('div');
   rootElement.className = 'note';
   rootElement.setAttribute('id', id);
   if (isSelected) {
     rootElement.setAttribute('selected', true);
-    rootElement.setAttribute('animated', true);
-    setTimeout(() => {
-      rootElement.setAttribute('animated', false);
-    }, 0)
+    if (withAnimation) applyAnimation(rootElement);
   }
   rootElement.addEventListener('click', onClick);
 

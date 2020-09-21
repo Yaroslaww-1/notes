@@ -1,15 +1,3 @@
-@keyframes select-item-animation {
-  from {
-      opacity: 0;
-      transform: translateY(-400px);
-}
-
-  to {
-      opacity: 1;
-      transform : translateY(0);
-  }
-}
-
 .note {
   display: flex;
   flex-direction: column;

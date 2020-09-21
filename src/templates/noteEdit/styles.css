@@ -6,3 +6,10 @@
   font-size: 18px;
   outline: none;
 }
+
+.note-edit.preview {
+  text-align: center;
+  padding-top: 20%;
+  font-size: 48px;
+  color: #99999b;
+}

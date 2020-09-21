@@ -19,7 +19,7 @@ export const createNoteElement = ({ title, id, timestamp, textPreview, isSelecte
 
   const headerElement = document.createElement('div');
   headerElement.className = 'header';
-  headerElement.innerHTML = title;
+  headerElement.innerText = title;
   rootElement.appendChild(headerElement);
 
   const contentElement = document.createElement('div');
@@ -27,12 +27,12 @@ export const createNoteElement = ({ title, id, timestamp, textPreview, isSelecte
 
   const timestampElement = document.createElement('div');
   timestampElement.className = 'timestamp';
-  timestampElement.innerHTML = timestamp;
+  timestampElement.innerText = timestamp;
   contentElement.appendChild(timestampElement);
 
   const previewElement = document.createElement('div');
   previewElement.className = 'preview';
-  previewElement.innerHTML = textPreview;
+  previewElement.innerText = textPreview;
   contentElement.appendChild(previewElement);
 
   rootElement.appendChild(contentElement);

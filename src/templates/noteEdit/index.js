@@ -4,8 +4,13 @@ export const createNoteEditElement = ({ note, isEditable = false, onNoteEdit }) 
   const rootElement = document.createElement('textarea');
   rootElement.value = note?.text || '';
   rootElement.className = 'note-edit';
-  if (!isEditable) rootElement.setAttribute('disabled', true);
+  if (!isEditable) {
+    rootElement.setAttribute('disabled', true);
+    rootElement.value = 'Select or add note and start editing';
+    rootElement.classList.add('preview');
+  };
   rootElement.addEventListener('input', () => {
+    console.log(rootElement.value);
     onNoteEdit(note, rootElement.value);
   });
   return rootElement;

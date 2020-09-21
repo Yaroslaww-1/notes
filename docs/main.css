@@ -61,18 +61,6 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-@keyframes select-item-animation {
-  from {
-      opacity: 0;
-      transform: translateY(-400px);
-}
-
-  to {
-      opacity: 1;
-      transform : translateY(0);
-  }
-}
-
 .note {
   display: flex;
   flex-direction: column;
@@ -122,4 +110,11 @@ body {
   color: #ffffff;
   font-size: 18px;
   outline: none;
+}
+
+.note-edit.preview {
+  text-align: center;
+  padding-top: 20%;
+  font-size: 48px;
+  color: #99999b;
 }

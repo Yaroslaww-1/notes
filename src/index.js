@@ -47,9 +47,7 @@ import { getIdFromUrl, getNoteUrl, setIdParam, updateIdParam } from './helpers/u
   });
   
   notesService.subscribe('updateNotesList', () => {
-    console.log('updates', notesService.getSelectedNote());
     updateIdParam(window.location.search, getNoteUrl(notesService.getSelectedNote()), (newParam) => {
-      console.log(newParam);
       window.history.replaceState(null, null, newParam)
     });
     setNotesListElement(

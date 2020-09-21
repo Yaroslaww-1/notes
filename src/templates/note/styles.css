@@ -4,6 +4,17 @@
   color: #ffffff;
 }
 
+.note:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+.note.animate {
+  opacity: 1;
+  transform: none;
+  transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
+}
+
 .note > .header {
   margin: 15px 0px 0px 20px;
   display: flex;

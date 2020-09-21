@@ -1,8 +1,9 @@
 import './styles.css';
 
-export const createNoteElement = ({ title, timestamp, textPreview, isSelected, onClick }) => {
+export const createNoteElement = ({ title, id, timestamp, textPreview, isSelected, onClick }) => {
   const rootElement = document.createElement('div');
   rootElement.className = 'note';
+  rootElement.setAttribute('id', id);
   if (isSelected) rootElement.setAttribute('selected', true);
   rootElement.addEventListener('click', onClick);
 

@@ -4,7 +4,13 @@ export const createNoteElement = ({ title, id, timestamp, textPreview, isSelecte
   const rootElement = document.createElement('div');
   rootElement.className = 'note';
   rootElement.setAttribute('id', id);
-  if (isSelected) rootElement.setAttribute('selected', true);
+  if (isSelected) {
+    rootElement.setAttribute('selected', true);
+    rootElement.setAttribute('animated', true);
+    setTimeout(() => {
+      rootElement.setAttribute('animated', false);
+    }, 0)
+  }
   rootElement.addEventListener('click', onClick);
 
   const headerElement = document.createElement('div');

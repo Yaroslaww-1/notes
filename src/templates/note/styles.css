@@ -1,3 +1,15 @@
+@keyframes select-item-animation {
+  from {
+      opacity: 0;
+      transform: translateY(-400px);
+}
+
+  to {
+      opacity: 1;
+      transform : translateY(0);
+  }
+}
+
 .note {
   display: flex;
   flex-direction: column;
@@ -9,9 +21,9 @@
   cursor: pointer;
 }
 
-.note.animate {
-  opacity: 1;
-  transform: none;
+.note[selected=true][animated=true] {
+  opacity: 0;
+  transform: rotateX(-90deg);
   transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
 }
 
@@ -36,4 +48,7 @@
 
 .note[selected=true] {
   background-color: #cb9520;
+  opacity: 1;
+  transform: none;
+  transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
 }

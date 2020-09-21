@@ -23,6 +23,12 @@ import { getIdFromUrl, getNoteUrl, setIdParam, updateIdParam } from './helpers/u
     setIdParam(window.location.search, getNoteUrl(note), (params) => {
       window.location.search = params.toString();
     });
+  };
+
+  const onNoteDelete = () => {
+    setIdParam(window.location.search, '', (params) => {
+      window.location.search = params.toString();
+    });
   }
 
   const RootElementFactory = (params) => {
@@ -30,7 +36,10 @@ import { getIdFromUrl, getNoteUrl, setIdParam, updateIdParam } from './helpers/u
       notes: notesService.getAllNotes(),
       selectedNote: notesService.getSelectedNote(),
       onNoteCreate: () => notesService.addNote(new Note({})),
-      onNoteDelete: () => notesService.deleteSelectedNote(),
+      onNoteDelete: () => {
+        notesService.deleteSelectedNote()
+        onNoteDelete();
+      },
       onNoteSelect,
       onNoteEdit: (note, newText) => {
         note.text = newText;

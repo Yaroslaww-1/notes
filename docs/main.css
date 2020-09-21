@@ -41,7 +41,7 @@ body {
   height: 95vh;
   background-color: #1d1c23;
   display: flex;
-  flex: 1;
+  flex: 1 1 25%;
   flex-direction: column;
   overflow-y: scroll;
 }
@@ -61,6 +61,18 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+@keyframes select-item-animation {
+  from {
+      opacity: 0;
+      transform: translateY(-400px);
+}
+
+  to {
+      opacity: 1;
+      transform : translateY(0);
+  }
+}
+
 .note {
   display: flex;
   flex-direction: column;
@@ -72,9 +84,9 @@ body {
   cursor: pointer;
 }
 
-.note.animate {
-  opacity: 1;
-  transform: none;
+.note[selected=true][animated=true] {
+  opacity: 0;
+  transform: rotateX(-90deg);
   transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
 }
 
@@ -99,10 +111,13 @@ body {
 
 .note[selected=true] {
   background-color: #cb9520;
+  opacity: 1;
+  transform: none;
+  transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
 }
 .note-edit {
   display: flex;
-  flex: 3.5;
+  flex: 3.5 2 75%;
   background-color: #242424;
   color: #ffffff;
   font-size: 18px;

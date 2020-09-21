@@ -3,6 +3,7 @@ body {
   margin: 0;
   height: 100%;
   overflow-y: hidden;
+  font-family: 'Roboto', sans-serif;
 }
 .main-content {
   display: flex;

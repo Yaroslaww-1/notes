@@ -1,6 +1,6 @@
-import { Note } from "../services/NotesService/note";
+import { Note } from "../NotesService/note";
 
-export class NoteRepository {
+export class NoteStorage {
   constructor() {}
 
   getAll = () => {

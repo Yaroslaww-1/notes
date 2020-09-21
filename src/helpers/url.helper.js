@@ -11,3 +11,11 @@ export const setIdParam = (url, id, changeUrlParams) => {
   urlParams.set('id', id);
   changeUrlParams(urlParams);
 }
+
+export const updateIdParam = (url, newId, updateUrlParams) => {
+  updateUrlParams('?id=' + newId);
+}
+
+export const getNoteUrl = (note) => {
+  return `${note.getTitle()}_${note.id}`;
+}

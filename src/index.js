@@ -5,7 +5,7 @@ import { Note } from './services/NotesService/note';
 import { createRootElement, setRootElement } from './templates/root';
 import { createNotesListElement, setNotesListElement } from './templates/notesList/index';
 import { createNoteEditElement, setNoteEditElement } from './templates/noteEdit/index';
-import { getIdFromUrl, setIdParam } from './helpers/url.helper';
+import { getIdFromUrl, getNoteUrl, setIdParam, updateIdParam } from './helpers/url.helper';
 
 // Show usage of IIFE
 (async () => {
@@ -20,7 +20,7 @@ import { getIdFromUrl, setIdParam } from './helpers/url.helper';
   });
 
   const onNoteSelect = (note) => {
-    setIdParam(window.location.search, `${note.getTitle()}_${note.id}`, (params) => {
+    setIdParam(window.location.search, getNoteUrl(note), (params) => {
       window.location.search = params.toString();
     });
   }
@@ -47,6 +47,11 @@ import { getIdFromUrl, setIdParam } from './helpers/url.helper';
   });
   
   notesService.subscribe('updateNotesList', () => {
+    console.log('updates', notesService.getSelectedNote());
+    updateIdParam(window.location.search, getNoteUrl(notesService.getSelectedNote()), (newParam) => {
+      console.log(newParam);
+      window.history.replaceState(null, null, newParam)
+    });
     setNotesListElement(
       createNotesListElement({
         notes: notesService.getAllNotes(),

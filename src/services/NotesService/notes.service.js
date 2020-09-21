@@ -1,10 +1,10 @@
 import { EventManager } from '../../helpers/events.helper';
-import { NoteRepository } from '../../data/note.repository';
+import { NoteStorage } from '../StorageService/noteStorage.service';
 
 export class NotesService extends EventManager {
   constructor() {
     super();
-    this.storage = new NoteRepository();
+    this.storage = new NoteStorage();
     this.#unselectAll();
   }
 

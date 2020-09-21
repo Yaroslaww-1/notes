@@ -5,6 +5,10 @@
   flex: 1 1 25%;
   flex-direction: column;
   overflow-y: scroll;
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 ::-webkit-scrollbar {

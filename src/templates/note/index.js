@@ -8,7 +8,7 @@ const applyAnimation = (element) => {
 }
 
 export const createNoteElement = ({ title, id, timestamp, textPreview, isSelected, onClick, withAnimation }) => {
-  const rootElement = document.createElement('div');
+  const rootElement = document.createElement('li');
   rootElement.className = 'note';
   rootElement.setAttribute('id', id);
   if (isSelected) {

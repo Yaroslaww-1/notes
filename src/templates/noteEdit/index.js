@@ -10,7 +10,6 @@ export const createNoteEditElement = ({ note, isEditable = false, onNoteEdit }) 
     rootElement.classList.add('preview');
   };
   rootElement.addEventListener('input', () => {
-    console.log(rootElement.value);
     onNoteEdit(note, rootElement.value);
   });
   return rootElement;

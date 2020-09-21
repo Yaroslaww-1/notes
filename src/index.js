@@ -60,7 +60,6 @@ import { getIdFromUrl, getNoteUrl, setIdParam, updateIdParam } from './helpers/u
     updateIdParam(window.location.search, getNoteUrl(notesService.getSelectedNote()), (newParam) => {
       window.history.replaceState(null, null, newParam)
     });
-    console.log(notificationType);
     setNotesListElement(
       createNotesListElement({
         notes: notesService.getAllNotes(),

@@ -2,7 +2,7 @@ import './styles.css';
 import { createNoteElement } from "../note";
 
 export const createNotesListElement = ({ notes, onNoteSelect, withAnimation = false }) => {
-  const rootElement = document.createElement('div');
+  const rootElement = document.createElement('ul');
   rootElement.className = 'notes-list';
   notes.forEach(note => {
     const noteElement = createNoteElement({
